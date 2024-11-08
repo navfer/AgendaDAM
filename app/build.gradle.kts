@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.navfer.agendadam"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.navfer.agendadam"
