@@ -12,6 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AgendaDAM"
         tools:targetApi="31">
+
+        <!--Main-->
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -21,6 +23,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <!--ListaContactos-->
+        <activity
+            android:name=".ListaContactos"
+            android:exported="true">
+        </activity>
+
+
+        <!--NuevaPersona-->
+        <activity
+            android:name=".NuevaPersona"
+            android:exported="true">
+        </activity>
+
+        <!--Ejemplo-->
     </application>
 
 </manifest>
