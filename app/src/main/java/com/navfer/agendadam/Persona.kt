@@ -28,6 +28,7 @@ class Persona {
         private var activo: Boolean = false
         private var telefono:String=""
         private var image:Int= -1
+
         constructor(nombre: String, apellidos: String, email: String, telefono:String,activo: Boolean) {
             this.nombre = nombre
             this.apellidos = apellidos

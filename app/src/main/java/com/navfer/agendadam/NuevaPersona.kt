@@ -39,9 +39,10 @@ class NuevaPersona: Fragment() {
 
             var nuevaPersona = Persona(nombre,apellido,email,telefono,true)
             viewModel.addItem(nuevaPersona)
-            parentFragmentManager.popBackStack()
-            parentFragmentManager.popBackStack()
 
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, ListaContactosFragment())
+                .commit()
 
         }
     }

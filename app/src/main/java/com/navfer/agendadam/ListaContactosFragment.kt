@@ -21,7 +21,6 @@ class ListaContactosFragment : Fragment() {
     /*
     private var onClick:
     private var onDoubleClick:
-
     ---------------------------------------------------------------------------------------------------
      */
 

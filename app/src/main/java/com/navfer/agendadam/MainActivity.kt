@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModel
@@ -21,19 +22,24 @@ import com.navfer.agendadam.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity(),
     NavigationView.OnNavigationItemSelectedListener {
     private val viewModel: PersonaViewModel by viewModels()
+    //la variable binding se usa como llamadas de los elementos del xml de la clase.
     private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
-
     }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         getMenuInflater().inflate(R.menu.opciones, menu);
         return true;
     }
 
+    /**
+     * La función onOptionsItemSelected determinará el comportamiento de los items del Menú del toolbar.
+     */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.item_add, R.id.item_lista -> {
@@ -41,6 +47,7 @@ class MainActivity : AppCompatActivity(),
                 true
             }
 
+                //Ajustes que definen el comportamiento de la aplicación al darle al botón de regreso del toolbar.
                 android.R.id.home->{
                     supportFragmentManager.popBackStack()
                     binding.toolbar.setTitle("Agenda DAM")
@@ -55,6 +62,11 @@ class MainActivity : AppCompatActivity(),
         }
     }
 
+    /**
+     * La función onNavigationItemSelected determinará la navegación de la aplicación y modificaciones
+     * del toolbar y visibilidad.
+     * El atributo item: representa el item seleccionado en el menú.
+     */
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.item_add -> {
@@ -63,10 +75,7 @@ class MainActivity : AppCompatActivity(),
                     .addToBackStack(null)
                     .commit()
 
-                //personas.add(it)
-
-
-                //Ajustes en el toolbar
+                //Ajustes en el toolbar.
                 supportActionBar?.setDisplayHomeAsUpEnabled(true)
                 binding.toolbar.setTitle("Nuevo Contacto")
                 binding.toolbar.menu.findItem(R.id.item_add)?.isVisible = false
@@ -81,7 +90,7 @@ class MainActivity : AppCompatActivity(),
                     .addToBackStack(null)
                     .commit()
 
-                //Ajustes en el toolbar
+                //Ajustes en el toolbar.
                 supportActionBar?.setDisplayHomeAsUpEnabled(true)
                 binding.toolbar.setTitle("Lista Contactos")
                 binding.toolbar.menu.findItem(R.id.item_lista)?.isVisible = false
@@ -93,5 +102,4 @@ class MainActivity : AppCompatActivity(),
             else -> false
         }
     }
-
 }
