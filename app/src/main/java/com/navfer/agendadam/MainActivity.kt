@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity(),
                 supportActionBar?.setDisplayHomeAsUpEnabled(true)
                 binding.toolbar.setTitle("Nuevo Contacto")
                 binding.toolbar.menu.findItem(R.id.item_add)?.isVisible = false
-                binding.toolbar.menu.findItem(R.id.item_lista)?.isVisible = true
+                binding.toolbar.menu.findItem(R.id.item_lista)?.isVisible = false
 
                 true
             }
@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity(),
                 supportActionBar?.setDisplayHomeAsUpEnabled(true)
                 binding.toolbar.setTitle("Lista Contactos")
                 binding.toolbar.menu.findItem(R.id.item_lista)?.isVisible = false
-                binding.toolbar.menu.findItem(R.id.item_add)?.isVisible = true
+                binding.toolbar.menu.findItem(R.id.item_add)?.isVisible = false
 
                 true
             }

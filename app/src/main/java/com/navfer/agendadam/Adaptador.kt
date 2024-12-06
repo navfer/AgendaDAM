@@ -6,9 +6,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import java.util.function.Consumer
 
-class Adaptador(private var elementos: MutableList<Persona>): RecyclerView.Adapter<Adaptador.ViewHolder>() {
+class Adaptador(private var elementos: MutableList<Persona>,
+                private val onClick: Consumer<Persona>,
+                private val onDoubleClick: Consumer<Persona> ): RecyclerView.Adapter<Adaptador.ViewHolder>() {
 
+    private var posicionSelect: Int?= null
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
         val imagen: ImageView
         var nombre : TextView
@@ -30,6 +34,16 @@ class Adaptador(private var elementos: MutableList<Persona>): RecyclerView.Adapt
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.imagen.setImageResource(this.elementos.get(position).getImagen())
         holder.nombre.text=(this.elementos.get(position).getNombre())
+        val persona = elementos[position]
+
+        if(posicionSelect == position){
+            holder.itemView.setBackgroundColor(holder.itemView.context.getColor(R.color.red))
+        }else{
+            android.R.color.transparent
+        }
+
+        
+
     }
 
 }
