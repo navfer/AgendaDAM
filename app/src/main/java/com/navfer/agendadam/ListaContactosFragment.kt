@@ -27,6 +27,8 @@ class ListaContactosFragment : Fragment() {
         return binding.root
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -41,6 +43,38 @@ class ListaContactosFragment : Fragment() {
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adaptador
 
+
+        /**
+         * Controla los eventos del BottomNavigation.
+         * Al pulsar Add -> Navega al fragmento NuevaPersona.
+         * Al pulsar Editar -> Navega al fragmento NuevaPersona para editar los datos de la Persona ya creada.
+         * Al pulsar Borrar -> Elimina la persona de la lista de elementos.
+         */
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.add -> {
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .remove(this)
+                        .add(R.id.fragmentContainerView, NuevaPersona())
+                        .addToBackStack(null)
+                        .commit()
+
+                    true
+                }
+
+
+                R.id.editar -> {
+                    TODO()
+                }
+
+
+                R.id.borrar -> {
+                    TODO()
+                }
+
+                else -> false
+            }
+        }
     }
 
     override fun onDestroyView() {
@@ -61,6 +95,8 @@ class ListaContactosFragment : Fragment() {
             .addToBackStack(null)
             .commit()
     }
+
+
 
 
 }

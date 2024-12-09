@@ -30,6 +30,10 @@ class MainActivity : AppCompatActivity(),
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainerView, MainFragment())
+            .commit()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -102,4 +106,5 @@ class MainActivity : AppCompatActivity(),
             else -> false
         }
     }
+
 }

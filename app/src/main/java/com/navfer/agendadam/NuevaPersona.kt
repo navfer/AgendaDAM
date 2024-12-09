@@ -37,11 +37,10 @@ class NuevaPersona: Fragment() {
             var email = binding.etEmail.text.toString()
             var telefono = binding.etTelefono.text.toString()
 
-            var nuevaPersona = Persona(nombre,apellido,email,telefono,true)
-            viewModel.addItem(nuevaPersona)
+            viewModel.addItem(nombre,apellido,email,telefono)
 
             requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainerView, ListaContactosFragment())
+                .replace(R.id.fragmentContainerView, MainFragment())
                 .commit()
 
         }

@@ -4,13 +4,13 @@
 
     <item
         android:id="@+id/item_add"
-        android:icon="@drawable/baseline_add_circle_24"
-    android:title="Imagen 1"
+        android:icon="@drawable/add"
+    android:title="Añadir"
     app:showAsAction="always" />
 
     <item
         android:id="@+id/item_lista"
         android:icon="@drawable/baseline_account_circle_24"
-    android:title="Imagen 2"
+    android:title="Listado"
     app:showAsAction="always" />
 </menu>

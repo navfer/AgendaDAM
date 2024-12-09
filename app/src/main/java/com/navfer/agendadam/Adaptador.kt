@@ -32,8 +32,8 @@ class Adaptador(private var elementos: MutableList<Persona>,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.imagen.setImageResource(this.elementos.get(position).getImagen())
-        holder.nombre.text=(this.elementos.get(position).getNombre())
+        holder.imagen.setImageResource(this.elementos.get(position).image)
+        holder.nombre.text=(this.elementos.get(position).nombre)
         val persona = elementos[position]
 
         if(posicionSelect == position){
