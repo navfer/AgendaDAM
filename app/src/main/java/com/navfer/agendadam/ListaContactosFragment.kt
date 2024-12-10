@@ -1,6 +1,7 @@
 package com.navfer.agendadam
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,16 +34,13 @@ class ListaContactosFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Configuración del RecyclerView
-        val adaptador = Adaptador(
-            viewModel.getItems(),
+        val adaptador = Adaptador(viewModel.getItems(),
             Consumer { persona -> hacerClick(persona) },
-            Consumer { persona -> hacerDobleClick(persona) }
-        )
+            Consumer { persona -> hacerDobleClick(persona) })
 
         val layoutManager = GridLayoutManager(requireContext(), 3)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.adapter = adaptador
-
 
         /**
          * Controla los eventos del BottomNavigation.
@@ -64,12 +62,25 @@ class ListaContactosFragment : Fragment() {
 
 
                 R.id.editar -> {
-                    TODO()
+                    if (onClick!= null){
+                        requireActivity().supportFragmentManager.beginTransaction()
+                            .replace(R.id.fragmentContainerView, NuevaPersona())
+                            .addToBackStack(null)
+                            .commit()
+                        true
+                    } else {
+                        false
+                    }
                 }
 
 
                 R.id.borrar -> {
-                    TODO()
+                    if (onClick!= null){
+
+                        true
+                    } else {
+                        false
+                    }
                 }
 
                 else -> false
@@ -77,26 +88,23 @@ class ListaContactosFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
     //hacer click en el viewHolder
     private fun hacerClick(persona: Persona) {
-
-
+        Log.d("ListaContactosFragment", "clic en: ${persona.nombre}")
     }
 
     // mantener pulsado viewholder
     private fun hacerDobleClick(persona: Persona) {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainerView, NuevaPersona())
+
+        val crearFragment = NuevaPersona()
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainerView, crearFragment)
             .addToBackStack(null)
             .commit()
     }
 
-
-
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

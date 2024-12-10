@@ -1,10 +1,13 @@
 package com.navfer.agendadam
 
+import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import java.util.function.Consumer
 
@@ -12,7 +15,7 @@ class Adaptador(private var elementos: MutableList<Persona>,
                 private val onClick: Consumer<Persona>,
                 private val onDoubleClick: Consumer<Persona> ): RecyclerView.Adapter<Adaptador.ViewHolder>() {
 
-    private var posicionSelect: Int?= null
+    private var posicionSelecionada: Int = -1
     class ViewHolder(view: View): RecyclerView.ViewHolder(view){
         val imagen: ImageView
         var nombre : TextView
@@ -31,19 +34,30 @@ class Adaptador(private var elementos: MutableList<Persona>,
         return this.elementos.size
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.imagen.setImageResource(this.elementos.get(position).image)
-        holder.nombre.text=(this.elementos.get(position).nombre)
-        val persona = elementos[position]
 
-        if(posicionSelect == position){
-            holder.itemView.setBackgroundColor(holder.itemView.context.getColor(R.color.red))
-        }else{
-            android.R.color.transparent
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val persona = elementos[holder.adapterPosition]
+        holder.imagen.setImageResource(persona.image)
+        holder.nombre.text = persona.nombre
+
+        if (posicionSelecionada == holder.adapterPosition) {
+            holder.itemView.setBackgroundResource(R.color.red)
+        } else {
+            holder.itemView.setBackgroundResource(android.R.color.transparent)
         }
 
-        
+        holder.itemView.setOnClickListener {
+            posicionSelecionada = holder.adapterPosition
+            onClick.accept(persona)
+            notifyItemChanged(holder.adapterPosition)
+        }
 
+        holder.itemView.setOnLongClickListener {
+            onDoubleClick.accept(persona)
+            true
+        }
     }
+
+
 
 }
